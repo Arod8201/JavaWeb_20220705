@@ -52,7 +52,7 @@ public class EmployeeServlet extends HttpServlet {
 		req.setAttribute("empBirth", empBirth);
 		req.setAttribute("empLang", Arrays.toString(empLang));
 		req.setAttribute("empMemo", empMemo);
-		// 轉發到目的地
+		// 轉發到目的地 /form/employee_result.jsp
 		rd.forward(req, resp);
 		
 		// 直接回傳 response 給前端

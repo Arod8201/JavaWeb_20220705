@@ -11,7 +11,7 @@
 			<fieldset>
 				<legend>員工資料表單回應</legend>
 				姓名: ${ empName }<p />
-				年齡: ${ "empAge" }<p />
+				年齡: ${ empAge }<p />
 				性別: ${ empSex }<p />
 				階級: ${ empPos }<p />
 				生日: ${ empBirth }<p />
