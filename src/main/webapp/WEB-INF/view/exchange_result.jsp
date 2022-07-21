@@ -1,7 +1,15 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="mvc.entity.Exchange"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/xml" prefix="x" %>
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,17 +46,39 @@
 				    </thead>
 				    <tbody>
 				    	<% List<Exchange> exchanges = (List<Exchange>)request.getAttribute("exchanges"); %>
+				    	<% DecimalFormat df = new DecimalFormat("#.##"); %>
+				    	<% SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss E"); %>
 				    	<% for(int i=0;i<exchanges.size();i++) {%>
 				    		<tr>
 				    			<td><%=i+1 %></td>
 				    			<td><%=exchanges.get(i).getAmount() %></td>
 				    			<td><%=exchanges.get(i).getFrom() %></td>
 				    			<td><%=exchanges.get(i).getTo() %></td>
-				    			<td><%=exchanges.get(i).getExchange() %></td>
-				    			<td><%=exchanges.get(i).getResult() %></td>
-				    			<td><%=exchanges.get(i).getDatetime() %></td>
+				    			<td><%=df.format(exchanges.get(i).getExchange()) %></td>
+				    			<td><%=df.format(exchanges.get(i).getResult()) %></td>
+				    			<td><%=sdf.format(exchanges.get(i).getDatetime()) %></td>
 				    		</tr>
 				    	<% } %>
+				    </tbody>
+				    <tr bgcolor="#ff0000"><td colspan="7"></td></tr>
+				    <tbody>
+				    	<c:forEach var="exchange" varStatus="i" items="${ exchanges }">
+				    		<tr>
+				    			<td>${ i.index+1 }</td>
+				    			<td>${ exchange.amount }</td>
+				    			<td>${ exchange.from }</td>
+				    			<td>${ exchange.to }</td>
+				    			<td>
+				    				<fmt:formatNumber value="${ exchange.exchange }" pattern="#.###" />
+				    			</td>
+				    			<td>
+				    				<fmt:formatNumber value="${ exchange.result }" pattern="#.###" /> 
+				    			</td>
+				    			<td>
+				    				<fmt:formatDate value="${ exchange.datetime }" pattern="yyyy-MM-dd a hh:mm:ss E" /> 
+				    			</td>
+				    		</tr>
+				    	</c:forEach>
 				    </tbody>
 				</table>
 			</fieldset>	
