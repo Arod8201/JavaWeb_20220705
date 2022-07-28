@@ -1,5 +1,6 @@
 package upload;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -69,6 +70,17 @@ public class UploadServlet extends HttpServlet {
 							  out.print("<br />");
 							  // 圖片呈現
 							  out.println(imgHtml);
+							  out.print("<br />");
+							  // 存檔前檢查 C:/upload 是否存在
+							  File file = new File("C:/upload");
+							  if (!file.exists()) { // 若 C:/upload不存在
+								  file.mkdir(); // 建立 C:/upload 資料夾
+							  }
+							  // 圖片存檔
+							  part.write(file.toString() + "/" + imageName);
+							  out.println("圖片存檔至 C:/upload 下成功 !");
+							  out.print("<br />");
+							  
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
