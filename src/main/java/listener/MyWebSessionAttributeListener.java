@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSessionBindingEvent;
 
 @WebListener
 public class MyWebSessionAttributeListener implements HttpSessionAttributeListener {
-
 	// 印出要監聽的內容
 	private void printInfo(HttpSession session, String message) {
 		System.out.println(message + ": " + session.getAttributeNames());
@@ -19,7 +18,6 @@ public class MyWebSessionAttributeListener implements HttpSessionAttributeListen
 			System.out.printf("%s = %s\n", name, session.getAttribute(name));
 		}
 	}
-
 	@Override
 	public void attributeAdded(HttpSessionBindingEvent event) {
 		printInfo(event.getSession(), "attributeAdded");
@@ -29,5 +27,5 @@ public class MyWebSessionAttributeListener implements HttpSessionAttributeListen
 	public void attributeReplaced(HttpSessionBindingEvent event) {
 		printInfo(event.getSession(), "attributeReplaced");
 	}
-
+	
 }

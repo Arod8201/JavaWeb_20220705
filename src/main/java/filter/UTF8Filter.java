@@ -10,8 +10,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
 // 定義要過濾的路徑
-//@WebFilter(urlPatterns = { "/report/daily", "/report/monthly" })
-@WebFilter(urlPatterns = { "/report/*", "/servlet/upload" })
+//@WebFilter(urlPatterns = {"/report/daily", "/report/monthly"})
+@WebFilter(urlPatterns = {"/report/*", "/servlet/upload"})
 public class UTF8Filter implements Filter {
 
 	@Override
@@ -22,7 +22,7 @@ public class UTF8Filter implements Filter {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
 		// 往下傳送
-		chain.doFilter(request, response);
+		chain.doFilter(request, response);	
 	}
-
+	
 }

@@ -17,9 +17,9 @@ public class GetSessionIDServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		PrintWriter out = resp.getWriter();
 		// 建立 session
-		HttpSession session = req.getSession(); // req.getSession(true)
+		HttpSession session = req.getSession(); // req.getSession(true);
 		String sessionId = session.getId();
 		out.println("session id = " + sessionId);
 	}
-
+	
 }
