@@ -71,5 +71,40 @@ public class JPAService {
 				 .setParameter("max", max)
 				 .getResultList();
 	}
+	
+	// 修改
+	public synchronized void updatePerson(Person person) {
+		// 判斷是否有此資料 ?
+		if (getPerson(person.getId()) == null) return;
+		// 修改程序
+		EntityTransaction etx = em.getTransaction(); // 取得交易物件(交易:新增,修改,刪除)
+		etx.begin(); // 開始
+		em.merge(person); // 修改 person
+		etx.commit(); // 提交
+	}
+	
+	// 刪除
+	// 自行寫法
+	public synchronized void deletePerson(Person person) {
+		// 判斷是否有此資料 ?
+		if (getPerson(person.getId()) == null) return;
+		// 刪除程序
+		EntityTransaction etx = em.getTransaction();
+		etx.begin(); // 開始
+		em.remove(person); // em.remove(em.merge(person)); 看 Entity的狀態為何
+		etx.commit(); // 提交
+	}
+	
+	// 老師寫法
+	public synchronized void deletePerson(Integer id) {
+		// 判斷是否有此資料 ?
+		Person person = getPerson(id);
+		if (person == null) return;
+		// 刪除程序
+		EntityTransaction etx = em.getTransaction(); // 取得交易物件(交易:新增,修改,刪除)
+		etx.begin(); // 開始
+		em.remove(person); // 修改 person
+		etx.commit(); // 提交
+	}
 
 }
